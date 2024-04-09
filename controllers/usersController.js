@@ -1,10 +1,39 @@
 const express = require("express");
-const { getAllUsers } = require("../queries/users.js");
+const { getAllUsers, findUserById } = require("../queries/users.js");
+const { getAllUserPlants } = require("../queries/userPlants");
 const users = express.Router();
 
 users.get("/", async (req, res) => {
     const user = await getAllUsers();
     if (user[0]) res.json({ users: user });
+});
+
+users.get("/user/:id", async (req, res) => {
+    try {
+    const { id } = req.params;
+
+    const user = await findUserById(id);
+
+    if (user) {
+      res.status(200).json({ user });
+    } else {
+      res.status(404).json({ message: "user not found" });
+    }
+  } catch (error) {
+    console.error("Error finding user by id:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
+// one user can have many plants
+// shows all plants for one user
+users.get("/user/:userId/userPlants", async (req, res) => {
+    try {
+      const { userId } = req.params;
+      const userPlants = await getAllUserPlants( userId );
+      res.json({ userPlants });
+    } catch (error) {
+      return `route error: ${error}`;
+    }
 });
 
 module.exports = users;
