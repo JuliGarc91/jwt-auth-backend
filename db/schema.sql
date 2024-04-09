@@ -6,7 +6,7 @@ CREATE DATABASE jwt_auth;
 
 \c jwt_auth
 
-DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS users CASCADE;
 
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
@@ -17,7 +17,7 @@ CREATE TABLE users (
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
-DROP TABLE IF EXISTS plants;
+DROP TABLE IF EXISTS plants CASCADE;
 
 CREATE TABLE plants (
   id INTEGER PRIMARY KEY,
@@ -25,17 +25,19 @@ CREATE TABLE plants (
   name VARCHAR(255),
   species VARCHAR(255),
   careInstructions TEXT,
-  wateringFrequency INTEGER,
-  sunlight INTEGER,
   imageUrl TEXT,
-  FOREIGN KEY (userId) REFERENCES users (id)
+  FOREIGN KEY (userId) REFERENCES users(id)
 );
 
-DROP TABLE IF EXISTS careLog;
+DROP TABLE IF EXISTS careLog CASCADE;
 
 CREATE TABLE careLog (
   id INTEGER PRIMARY KEY,
   plantId INTEGER,
   careDate TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-  FOREIGN KEY (plantId) REFERENCES plants (id)
+  description TEXT,
+  imageUrl TEXT,
+  wateringFrequency INTEGER,
+  sunlight INTEGER,
+  FOREIGN KEY (plantId) REFERENCES plants(id)
 );
