@@ -4,7 +4,10 @@ const express = require("express");
 const cron = require("node-cron");
 const cookieParser = require("cookie-parser");
 
+// controllers
 const authController = require("./controllers/authController");
+const usersController = require("./controllers/usersController");
+const userPlantsController = require("./controllers/userPlantsController");
 
 // CONFIGURATION
 const app = express();
@@ -28,6 +31,8 @@ app.use(express.json());
 app.use(cookieParser());
 
 app.use("/api/auth", authController);
+app.use("/api/users", usersController);
+app.use("/api/userPlants", userPlantsController);
 
 // ROUTES
 app.get("/", (_req, res) => {
