@@ -6,7 +6,7 @@ const db = require("../db/dbConfig");
  */
 const getAllUsers = async () => {
   try {
-    const query = "SELECT * FROM users;"
+    const query = "SELECT id, username, email FROM users;"
     const users = await db.any(query);
     return users;
   } catch (error) {
