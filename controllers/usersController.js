@@ -8,7 +8,7 @@ users.get("/", async (req, res) => {
     if (user[0]) res.json({ users: user });
 });
 
-users.get("/user/:id", async (req, res) => {
+users.get("/:id", async (req, res) => {
     try {
     const { id } = req.params;
 
@@ -26,7 +26,7 @@ users.get("/user/:id", async (req, res) => {
 });
 // one user can have many plants
 // shows all plants for one user
-users.get("/user/:userId/userPlants", async (req, res) => {
+users.get("/:userId/userPlants", async (req, res) => {
     try {
       const { userId } = req.params;
       const userPlants = await getAllUserPlants( userId );
