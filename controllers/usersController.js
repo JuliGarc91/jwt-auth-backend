@@ -1,6 +1,6 @@
 const express = require("express");
 const { getAllUsers, findUserById } = require("../queries/users.js");
-const { getAllUserPlants, getOneUserPlant } = require("../queries/userPlants");
+const { getAllUserPlants, getOneUserPlant, addUserPlant } = require("../queries/userPlants");
 const users = express.Router();
 
 users.get("/", async (req, res) => {
@@ -32,7 +32,8 @@ users.get("/:userId/userPlants", async (req, res) => {
       const userPlants = await getAllUserPlants( userId );
       res.json({ userPlants });
     } catch (error) {
-      return `route error: ${error}`;
+      console.error("Error fetching user's plants:", error);
+      res.status(500).json({ error: "Internal server error" });
     }
 });
 
@@ -46,8 +47,19 @@ users.get("/:userId/userPlants/:id", async (req, res) => {
       res.status(404).json({ message: "plant not found" });
     }
   } catch (error) {
-    console.error("Error fetching plant:", error);
+    console.error("Error fetching user's plant:", error);
     res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+users.post("/:userId/userPlants", async(req, res) => {
+  const { userId } = req.params;
+  try {
+    const plant = await addUserPlant(...[req.body], userId);
+    res.json({ plant });
+  } catch (error) {
+    console.error("Error adding user's plant:", error)
+    res.status(500).json({ error: "Internal server error" })
   }
 });
 
