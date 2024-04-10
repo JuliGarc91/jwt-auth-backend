@@ -1,6 +1,6 @@
 const express = require("express");
 const { getAllUsers, findUserById } = require("../queries/users.js");
-const { getAllUserPlants, getOneUserPlant, addUserPlant, editUserPlant } = require("../queries/userPlants");
+const { getAllUserPlants, getOneUserPlant, addUserPlant, editUserPlant, deleteUserPlant } = require("../queries/userPlants");
 const users = express.Router();
 
 users.get("/", async (req, res) => {
@@ -83,5 +83,17 @@ users.put("/:userId/userPlants/:id", async(req, res) => {
     res.status(500).json({ error: "Internal server error" });
   }
 });
+
+// delete user's plant from profile (dashboard)
+users.delete("/:userId/userPlants/:id", async (req, res) => {
+  const { userId, id } = req.params;
+  try {
+    await deleteUserPlant(id, userId);
+    res.json({ message: "User's plant deleted successfully" });
+  } catch (error) {
+    console.error("Error deleting user's plant:", error)
+    res.status(500).json({ error: "Internal server error" });
+  }
+})
 
 module.exports = users;

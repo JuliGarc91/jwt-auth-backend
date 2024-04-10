@@ -18,7 +18,7 @@ const getAllUserPlants = async (userId) => {
 const getOneUserPlant = async (userId, id) => {
   try {
     const query = await db.oneOrNone(
-      `SELECT plants.*, users.username FROM plants JOIN users ON plants.userId = users.id WHERE plants.userId=$1 AND plants.id=$2`,
+      `SELECT plants.*, users.username FROM plants JOIN users ON plants.userId = users.id WHERE plants.userId=$1 AND plants.id=$2;`,
       [userId, id]
     );
     return query;
@@ -63,9 +63,24 @@ const editUserPlant = async (plantId, editedPlant) => {
   }
 }
 
+const deleteUserPlant = async (plantId) => {
+  try {
+    const query = `
+      DELETE FROM plants
+      WHERE id = $1
+      RETURNING *;`;
+    const deletedUserPlantData = await db.one(query, [plantId]);
+    return deletedUserPlantData
+  } catch (error) {
+    console.error("Error deleting plant:", error);
+    throw error;
+  }
+}
+
 module.exports = {
     getAllUserPlants,
     getOneUserPlant,
     addUserPlant,
-    editUserPlant
+    editUserPlant,
+    deleteUserPlant
 };
