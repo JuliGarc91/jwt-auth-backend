@@ -21,7 +21,7 @@ DROP TABLE IF EXISTS plants CASCADE;
 
 CREATE TABLE plants (
   id SERIAL PRIMARY KEY,
-  userId INTEGER,
+  userId INTEGER NOT NULL,
   name VARCHAR(255),
   species VARCHAR(255),
   careInstructions TEXT,
@@ -33,7 +33,7 @@ DROP TABLE IF EXISTS careLog CASCADE;
 
 CREATE TABLE careLog (
   id SERIAL PRIMARY KEY,
-  plantId INTEGER,
+  plantId INTEGER NOT NULL,
   careDate TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
   description TEXT,
   imageUrl TEXT,

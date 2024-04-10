@@ -46,8 +46,26 @@ const addUserPlant = async (plant) => {
   }
 };
 
+const editUserPlant = async (plantId, editedPlant) => {
+  try {
+    const query = `
+      UPDATE plants
+      SET userId = $1, name = $2, species = $3, careInstructions = $4, imageUrl = $5
+      WHERE id = $6
+      RETURNING *;`;
+    const editedUserPlant = await db.one(query, [
+      editedPlant.userid, editedPlant.name, editedPlant.species, editedPlant.careinstructions, editedPlant.imageurl, plantId
+    ]);
+    return editedUserPlant;
+  } catch (error) {
+    console.error("Error editing plant:", error);
+    throw error;
+  }
+}
+
 module.exports = {
     getAllUserPlants,
     getOneUserPlant,
-    addUserPlant
+    addUserPlant,
+    editUserPlant
 };
