@@ -1,6 +1,6 @@
 const express = require("express");
 const { getAllUsers, findUserById } = require("../queries/users.js");
-const { getAllUserPlants } = require("../queries/userPlants");
+const { getAllUserPlants, getOneUserPlant } = require("../queries/userPlants");
 const users = express.Router();
 
 users.get("/", async (req, res) => {
@@ -34,6 +34,21 @@ users.get("/:userId/userPlants", async (req, res) => {
     } catch (error) {
       return `route error: ${error}`;
     }
+});
+
+users.get("/:userId/userPlants/:id", async (req, res) => {
+  try {
+    const { userId, id } = req.params;
+    const plant = await getOneUserPlant(userId, id);
+    if (plant) {
+      res.status(200).json({ plant });
+    } else {
+      res.status(404).json({ message: "plant not found" });
+    }
+  } catch (error) {
+    console.error("Error fetching plant:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
 });
 
 module.exports = users;
