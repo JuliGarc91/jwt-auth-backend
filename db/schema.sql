@@ -42,7 +42,7 @@ CREATE TABLE careLog (
   pottedPlant BOOLEAN,
   needsRepotting BOOLEAN,
   rootsHealthy BOOLEAN,
-  wateringFrequencyPerDay INTEGER,
+  wateringFrequencyPerWeek INTEGER,
   sunlightHoursPerDay INTEGER,
   FOREIGN KEY (plantId) REFERENCES plants(id)
 );
