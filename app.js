@@ -7,6 +7,7 @@ const cookieParser = require("cookie-parser");
 // controllers
 const authController = require("./controllers/authController");
 const usersController = require("./controllers/usersController");
+// const careLogsController = require("./controllers/careLogsController")
 
 // CONFIGURATION
 const app = express();
@@ -31,6 +32,7 @@ app.use(cookieParser());
 
 app.use("/api/auth", authController);
 app.use("/api/users", usersController);
+// app.use("/api/carelogs", careLogsController);
 
 // ROUTES
 app.get("/", (_req, res) => {

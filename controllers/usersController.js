@@ -1,6 +1,7 @@
 const express = require("express");
 const { getAllUsers, findUserById } = require("../queries/users.js");
 const { getAllUserPlants, getOneUserPlant, addUserPlant, editUserPlant, deleteUserPlant } = require("../queries/userPlants");
+const { getAllPlantLogs } = require("../queries/plantLogs.js")
 const users = express.Router();
 
 users.get("/", async (req, res) => {
@@ -52,6 +53,26 @@ users.get("/:userId/userPlants/:id", async (req, res) => {
     }
   } catch (error) {
     console.error("Error fetching user's plant:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+// carelogs
+// show all carelogs for selected plant added by logged in user
+users.get("/:userId/userPlants/:plantId/carelogs", async (req, res) => {
+  try {
+    const { userId, plantId, id } = req.params;
+    // Fetch the specific user's plant
+    const plant = await getOneUserPlant(userId, plantId);
+    if (plant) {
+      // If the plant is found, fetch all care logs associated with this plant
+      const careLogs = await getAllPlantLogs(plantId);
+      res.status(200).json({ plant, careLogs });
+    } else {
+      res.status(404).json({ message: "Plant not found" });
+    }
+  } catch (error) {
+    console.error("Error fetching user's plant and care logs:", error);
     res.status(500).json({ error: "Internal server error" });
   }
 });
