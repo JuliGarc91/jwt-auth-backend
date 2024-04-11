@@ -37,7 +37,12 @@ CREATE TABLE careLog (
   careDate TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
   description TEXT,
   imageUrl TEXT,
-  wateringFrequency INTEGER,
-  sunlight INTEGER,
+  soilIsMoist BOOLEAN,
+  needsWaterToday BOOLEAN,
+  pottedPlant BOOLEAN,
+  needsRepotting BOOLEAN,
+  rootsHealthy BOOLEAN,
+  wateringFrequencyPerDay INTEGER,
+  sunlightHoursPerDay INTEGER,
   FOREIGN KEY (plantId) REFERENCES plants(id)
 );
