@@ -82,7 +82,7 @@ users.get("/:userId/userPlants/:plantId/carelogs/:id", async (req, res) => {
     const { userId, plantId, id } = req.params;
     const plant = await getOneUserPlant(userId, plantId);
     if (plant) {
-      const careLogs = await getOnePlantLog(userId, plantId, id);
+      const careLogs = await getOnePlantLog(plantId, id);
       res.status(200).json({ plant, careLogs });
     } else {
       res.status(404).json({ message: "Plant not found" });

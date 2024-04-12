@@ -31,14 +31,14 @@ const getAllPlantLogs = async (plantId) => {
     }
 };
 
-const getOnePlantLog = async (userId, plantId, id) => {
+const getOnePlantLog = async (plantId, id) => {
   try {
     const query = await db.oneOrNone(
       `SELECT careLogs.* 
        FROM careLogs 
        FULL OUTER JOIN plants ON careLogs.plantId = plants.id 
-       WHERE plants.userId = $1 AND plants.id = $2 AND careLogs.id = $3`,
-      [userId, plantId, id]
+       WHERE plants.id=$1 AND careLogs.id=$2;`,
+      [plantId, id]
     );
     return query;
   } catch (error) {
