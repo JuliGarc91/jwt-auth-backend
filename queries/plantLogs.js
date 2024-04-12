@@ -4,7 +4,7 @@ const db = require("../db/dbConfig");
 CREATE TABLE careLogs (
     id SERIAL PRIMARY KEY,
     plantId INTEGER NOT NULL,
-    careDate TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    careDate TEXT,
     description TEXT,
     imageUrl TEXT,
     soilIsMoist BOOLEAN,

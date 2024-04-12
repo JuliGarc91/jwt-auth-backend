@@ -1,7 +1,7 @@
 const express = require("express");
 const { getAllUsers, findUserById } = require("../queries/users.js");
 const { getAllUserPlants, getOneUserPlant, addUserPlant, editUserPlant, deleteUserPlant } = require("../queries/userPlants");
-const { getAllPlantLogs } = require("../queries/plantLogs.js")
+const { getAllPlantLogs } = require("../queries/plantLogs.js");
 const users = express.Router();
 
 users.get("/", async (req, res) => {
@@ -61,11 +61,9 @@ users.get("/:userId/userPlants/:id", async (req, res) => {
 // show all carelogs for selected plant added by logged in user
 users.get("/:userId/userPlants/:plantId/carelogs", async (req, res) => {
   try {
-    const { userId, plantId, id } = req.params;
-    // Fetch the specific user's plant
+    const { userId, plantId } = req.params;
     const plant = await getOneUserPlant(userId, plantId);
     if (plant) {
-      // If the plant is found, fetch all care logs associated with this plant
       const careLogs = await getAllPlantLogs(plantId);
       res.status(200).json({ plant, careLogs });
     } else {
@@ -115,6 +113,6 @@ users.delete("/:userId/userPlants/:id", async (req, res) => {
     console.error("Error deleting user's plant:", error)
     res.status(500).json({ error: "Internal server error" });
   }
-})
+});
 
 module.exports = users;
