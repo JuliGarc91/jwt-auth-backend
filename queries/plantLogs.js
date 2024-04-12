@@ -26,11 +26,29 @@ const getAllPlantLogs = async (plantId) => {
   
       return careLogs;
     } catch (error) {
-      console.error("Error finding careLogs:", error);
+      console.error("Error finding plant care logs:", error);
       throw error;
     }
 };
 
+const getOnePlantLog = async (userId, plantId, id) => {
+  try {
+    const query = await db.oneOrNone(
+      `SELECT careLogs.* 
+       FROM careLogs 
+       INNER JOIN plants ON careLogs.plantId = plants.id 
+       WHERE plants.userId = $1 AND plants.id = $2 AND careLogs.id = $3`,
+      [userId, plantId, id]
+    );
+    return query;
+  } catch (error) {
+    console.error("Error finding plant care log:", error);
+    throw error;
+  }
+};
+
+
 module.exports = {
-    getAllPlantLogs
+    getAllPlantLogs,
+    getOnePlantLog
 }
