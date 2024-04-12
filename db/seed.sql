@@ -14,11 +14,11 @@ VALUES
 ;
 
 -- image url to see plant's progress everytime theres a log
-INSERT INTO careLogs (plantId, careDate, description, imageUrl, soilIsMoist, needsWaterToday, pottedPlant, needsRepotting, rootsHealthy, wateringFrequencyPerWeek, sunlightHoursPerDay)
+INSERT INTO careLogs (plantId, plantName, careDate, description, imageUrl, soilIsMoist, needsWaterToday, pottedPlant, needsRepotting, rootsHealthy, wateringFrequencyPerWeek, sunlightHoursPerDay)
 VALUES
-(1, '2024-04-12', 'Watered the spider plant.', NULL, TRUE, FALSE, TRUE, FALSE, TRUE, 2, 6),
-(1, '2024-04-13', 'Propagated the spider plant.', 'https://example.com/watering_image.jpg', TRUE, FALSE, TRUE, FALSE, TRUE, 2, 6),
-(2, '2024-04-12', 'Trimmed dead leaves from the snake plant.', 'https://example.com/trimming_image.jpg', TRUE, TRUE, TRUE, FALSE, TRUE, 1, 4),
-(3, '2024-04-12', 'Applied fertilizer to the peace lily.', 'https://example.com/fertilizing_image.jpg', TRUE, FALSE, TRUE, TRUE, TRUE, 2, 3);
+(1, '2024-04-12', 'Spider Plant', 'Watered the spider plant.', NULL, TRUE, FALSE, TRUE, FALSE, TRUE, 2, 6),
+(1, '2024-04-13', 'Spider Plant', 'Propagated the spider plant.', 'https://example.com/watering_image.jpg', TRUE, FALSE, TRUE, FALSE, TRUE, 2, 6),
+(2, '2024-04-12', 'Snake Plant', 'Trimmed dead leaves from the snake plant.', 'https://example.com/trimming_image.jpg', TRUE, TRUE, TRUE, FALSE, TRUE, 1, 4),
+(3, '2024-04-12', 'Peace Lily' ,'Applied fertilizer to the peace lily.', 'https://example.com/fertilizing_image.jpg', TRUE, FALSE, TRUE, TRUE, TRUE, 2, 3);
 
 

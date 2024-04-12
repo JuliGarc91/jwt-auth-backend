@@ -22,7 +22,7 @@ DROP TABLE IF EXISTS plants CASCADE;
 CREATE TABLE plants (
   id SERIAL PRIMARY KEY,
   userId INTEGER NOT NULL,
-  name VARCHAR(255),
+  name VARCHAR(255) NOT NULL,
   species VARCHAR(255),
   careInstructions TEXT,
   imageUrl TEXT,
@@ -34,6 +34,7 @@ DROP TABLE IF EXISTS careLog CASCADE;
 CREATE TABLE careLogs (
   id SERIAL PRIMARY KEY,
   plantId INTEGER NOT NULL,
+  plantName VARCHAR(255) NOT NULL,
   careDate TEXT,
   description TEXT,
   imageUrl TEXT,

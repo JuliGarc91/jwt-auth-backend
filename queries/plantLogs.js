@@ -36,7 +36,7 @@ const getOnePlantLog = async (plantId, id) => {
     const query = await db.oneOrNone(
       `SELECT careLogs.* 
        FROM careLogs 
-       FULL OUTER JOIN plants ON careLogs.plantId = plants.id 
+       INNER JOIN plants ON careLogs.plantId = plants.id 
        WHERE plants.id=$1 AND careLogs.id=$2;`,
       [plantId, id]
     );
