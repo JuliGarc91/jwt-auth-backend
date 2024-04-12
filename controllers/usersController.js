@@ -1,9 +1,10 @@
 const express = require("express");
 const { getAllUsers, findUserById } = require("../queries/users.js");
 const { getAllUserPlants, getOneUserPlant, addUserPlant, editUserPlant, deleteUserPlant } = require("../queries/userPlants");
-const { getAllPlantLogs } = require("../queries/plantLogs.js");
+const { getAllPlantLogs, getOnePlantLog } = require("../queries/plantLogs.js");
 const users = express.Router();
 
+// -- Show All, Show One user's plant(s) and corresponding care logs ---
 users.get("/", async (req, res) => {
     try{
       const user = await getAllUsers();
@@ -57,7 +58,7 @@ users.get("/:userId/userPlants/:id", async (req, res) => {
   }
 });
 
-// carelogs
+// --- one user's plant can have many carelogs ---
 // show all carelogs for selected plant added by logged in user
 users.get("/:userId/userPlants/:plantId/carelogs", async (req, res) => {
   try {
@@ -75,6 +76,24 @@ users.get("/:userId/userPlants/:plantId/carelogs", async (req, res) => {
   }
 });
 
+// show one care log for selected plant added by logged in user
+users.get("/:userId/userPlants/:plantId/carelogs/:id", async (req, res) => {
+  try {
+    const { userId, plantId, id } = req.params;
+    const plant = await getOneUserPlant(userId, plantId);
+    if (plant) {
+      const careLogs = await getOnePlantLog(userId, plantId, id);
+      res.status(200).json({ plant, careLogs });
+    } else {
+      res.status(404).json({ message: "Plant not found" });
+    }
+  } catch (error) {
+    console.error("Error fetching user's plant and care logs:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+// --- Create, Update, Delete user's plants ---
 // add new plant as logged in user
 users.post("/:userId/userPlants", async(req, res) => {
   const { userId } = req.params;
