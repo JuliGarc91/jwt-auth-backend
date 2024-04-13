@@ -14,11 +14,14 @@ VALUES
 ;
 
 -- image url to see plant's progress everytime theres a log
-INSERT INTO careLogs (plantId, plantName, careDate, description, imageUrl, soilIsMoist, needsWaterToday, pottedPlant, needsRepotting, rootsHealthy, wateringFrequencyPerWeek, sunlightHoursPerDay)
+INSERT INTO careLogs (plantId, careDate, plantName, description, imageUrl, soilIsMoist, needsWaterToday, pottedPlant, isPropagation, needsRepotting, rootsHealthy, wateringFrequencyPerWeek, sunlightHoursPerDay)
 VALUES
-(1, '2024-04-12', 'Spider Plant', 'Watered the spider plant.', NULL, TRUE, FALSE, TRUE, FALSE, TRUE, 2, 6),
-(1, '2024-04-13', 'Spider Plant', 'Propagated the spider plant.', 'https://example.com/watering_image.jpg', TRUE, FALSE, TRUE, FALSE, TRUE, 2, 6),
-(2, '2024-04-12', 'Snake Plant', 'Trimmed dead leaves from the snake plant.', 'https://example.com/trimming_image.jpg', TRUE, TRUE, TRUE, FALSE, TRUE, 1, 4),
-(3, '2024-04-12', 'Peace Lily' ,'Applied fertilizer to the peace lily.', 'https://example.com/fertilizing_image.jpg', TRUE, FALSE, TRUE, TRUE, TRUE, 2, 3);
+(1, '2024-04-01', 'Spider Plant', 'Day 1: snipped babies, and propagated the spider plant.', 'https://www.fwmadebycarli.com/wp-content/uploads/2020/03/Spider-Plant-Propagation-10-1536x1281.jpg', FALSE, FALSE, FALSE, TRUE, FALSE, TRUE, 2, 6),
+(1, '2024-04-03', 'Spider Plant', 'Day 3: Propagated the spider plant - some root growth', 'https://www.fwmadebycarli.com/wp-content/uploads/2020/03/Spider-Plant-Propagation-2-1536x1055.jpg', FALSE, FALSE, FALSE, TRUE, FALSE, TRUE, 2, 6),
+(1, '2024-04-05', 'Spider Plant', 'Day 5: Propagated the spider plant - good amount of root growth. Plant ready to be planted', 'https://www.fwmadebycarli.com/wp-content/uploads/2020/03/66301-1536x1048.jpg', FALSE, FALSE, FALSE, TRUE, TRUE, TRUE, 2, 6),
+(1, '2024-04-13', 'Spider Plant', 'Day 13: Propagated the spider plant - ALOT of root growth. Plant definitely needs to be planted', 'https://www.fwmadebycarli.com/wp-content/uploads/2020/03/Spider-Plant-Propagation-4-scaled.jpg',  FALSE, FALSE, FALSE, TRUE, TRUE, TRUE, 2, 6),
+(1, '2024-04-13', 'Spider Plant', 'Day 13: Planted and watered propagations!', 'https://www.fwmadebycarli.com/wp-content/uploads/2020/03/Spider-Plant-Propagation-4-scaled.jpg', TRUE, FALSE, TRUE, FALSE, FALSE, TRUE, 2, 6),
+(2, '2024-04-12', 'Snake Plant', 'Trimmed dead leaves from the snake plant.', 'https://e87o6y2muwg.exactdn.com/wp-content/uploads/2023/04/snake-plant-turning-yellow-dp552505010.jpg?strip=all&lossy=1&ssl=1', TRUE, TRUE, TRUE, FALSE, FALSE, TRUE, 1, 4),
+(3, '2024-04-12', 'Peace Lily' ,'Applied fertilizer to the peace lily.', 'https://www.pennington.com/all-products/fertilizer/resources/-/media/Project/OneWeb/Pennington/Images/blog/fertilizer/how-to-grow-and-care-for-a-peace-lily/waking-winter-plants.jpg', TRUE, FALSE, TRUE, TRUE, FALSE, TRUE, 2, 3);
 
 

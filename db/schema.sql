@@ -41,6 +41,7 @@ CREATE TABLE careLogs (
   soilIsMoist BOOLEAN,
   needsWaterToday BOOLEAN,
   pottedPlant BOOLEAN,
+  isPropagation BOOLEAN,
   needsRepotting BOOLEAN,
   rootsHealthy BOOLEAN,
   wateringFrequencyPerWeek INTEGER,
