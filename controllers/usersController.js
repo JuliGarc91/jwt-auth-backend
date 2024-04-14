@@ -94,7 +94,7 @@ users.get("/:userId/userPlants/:plantId/carelogs/:id", async (req, res) => {
 });
 
 // delete carelog that corresponds to logged in user's plant
-users.delete("/:userId/userPlants/:plantId/carelogs/:id", async (req,res) => {
+users.delete("/:userId/userPlants/:plantId/carelogs/:id", async (req, res) => {
   const { userId, plantId, id } = req.params;
   try {
     const plant = await getOneUserPlant(userId, plantId);

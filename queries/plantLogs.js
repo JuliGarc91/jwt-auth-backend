@@ -1,23 +1,5 @@
 const db = require("../db/dbConfig");
 
-/*
-CREATE TABLE careLogs (
-    id SERIAL PRIMARY KEY,
-    plantId INTEGER NOT NULL,
-    careDate TEXT,
-    description TEXT,
-    imageUrl TEXT,
-    soilIsMoist BOOLEAN,
-    needsWaterToday BOOLEAN,
-    pottedPlant BOOLEAN,
-    needsRepotting BOOLEAN,
-    rootsHealthy BOOLEAN,
-    wateringFrequencyPerWeek INTEGER,
-    sunlightHoursPerDay INTEGER,
-    FOREIGN KEY (plantId) REFERENCES plants(id)
-  );
-*/
-
 const getAllPlantLogs = async (plantId) => {
     try {
       const query = "SELECT * FROM careLogs WHERE plantId=$1;";
@@ -48,20 +30,21 @@ const getOnePlantLog = async (plantId, id) => {
   }
 };
 
-const deletePlantLog = async (id) => {
+
+const deletePlantLog = async (plantId, id) => {
   try {
     const query = `
       DELETE FROM careLogs
       WHERE id = $1
+      AND plantId = $2
       RETURNING *;`;
-    const deletedCareLogData=await db.one(query,[id]);
+    const deletedCareLogData = await db.one (query, [id, plantId]);
     return deletedCareLogData;
   } catch (error) {
     console.error("Error deleting plant care log:", error);
     throw error;
   }
-}
-
+};
 
 module.exports = {
     getAllPlantLogs,
