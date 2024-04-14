@@ -24,12 +24,17 @@ CREATE TABLE plants (
   userId INTEGER NOT NULL,
   name VARCHAR(255) NOT NULL,
   species VARCHAR(255),
+  color VARCHAR(255),
+  plantType VARCHAR(255),
+  isFloweringPlant BOOLEAN,
+  soilType VARCHAR(255),
   careInstructions TEXT,
   imageUrl TEXT,
   FOREIGN KEY (userId) REFERENCES users(id)
 );
 
 DROP TABLE IF EXISTS careLog CASCADE;
+
 
 CREATE TABLE careLogs (
   id SERIAL PRIMARY KEY,
@@ -38,6 +43,7 @@ CREATE TABLE careLogs (
   careDate TEXT,
   description TEXT,
   imageUrl TEXT,
+  heightInInches INTEGER,
   soilIsMoist BOOLEAN,
   needsWaterToday BOOLEAN,
   pottedPlant BOOLEAN,
