@@ -65,6 +65,10 @@ const editUserPlant = async (plantId, editedPlant) => {
 
 const deleteUserPlant = async (plantId) => {
   try {
+    // first need to delete care logs associated with the plant because of foreign key constraint where one plant can have many care logs
+    await db.none('DELETE FROM carelogs WHERE plantId = $1', [plantId]);
+    
+    // then plant can be deleted
     const query = `
       DELETE FROM plants
       WHERE id = $1

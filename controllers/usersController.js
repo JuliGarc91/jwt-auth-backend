@@ -95,16 +95,11 @@ users.get("/:userId/userPlants/:plantId/carelogs/:id", async (req, res) => {
 
 // delete carelog that corresponds to logged in user's plant
 users.delete("/:userId/userPlants/:plantId/carelogs/:id", async (req, res) => {
-  const { userId, plantId, id } = req.params;
+  const { plantId, id } = req.params;
   try {
-    const plant = await getOneUserPlant(userId, plantId);
-    if (plant) {
       await deletePlantLog(plantId, id);
       res.json({ message: "Plant care log successfully deleted" });
-    } else {
-      res.status(404).json({ message: "Plant not found" });
-    }
-  } catch (error) {
+    } catch (error) {
     console.error("Error deleting user's plant log:", error);
     res.status(500).json({ error: "Internal server error" });
   }

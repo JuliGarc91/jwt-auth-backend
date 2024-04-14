@@ -46,6 +46,8 @@ const deletePlantLog = async (plantId, id) => {
   }
 };
 
+// make a create and edit 
+
 module.exports = {
     getAllPlantLogs,
     getOnePlantLog,
