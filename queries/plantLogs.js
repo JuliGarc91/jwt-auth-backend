@@ -31,6 +31,7 @@ const getAllPlantLogs = async (plantId) => {
     }
 };
 
+// probably not needed because chart view includes all the carelogs
 const getOnePlantLog = async (plantId, id) => {
   try {
     const query = await db.oneOrNone(
@@ -47,8 +48,23 @@ const getOnePlantLog = async (plantId, id) => {
   }
 };
 
+const deletePlantLog = async (id) => {
+  try {
+    const query = `
+      DELETE FROM careLogs
+      WHERE id = $1
+      RETURNING *;`;
+    const deletedCareLogData=await db.one(query,[id]);
+    return deletedCareLogData;
+  } catch (error) {
+    console.error("Error deleting plant care log:", error);
+    throw error;
+  }
+}
+
 
 module.exports = {
     getAllPlantLogs,
-    getOnePlantLog
+    getOnePlantLog,
+    deletePlantLog
 }

@@ -1,7 +1,7 @@
 const express = require("express");
 const { getAllUsers, findUserById } = require("../queries/users.js");
 const { getAllUserPlants, getOneUserPlant, addUserPlant, editUserPlant, deleteUserPlant } = require("../queries/userPlants");
-const { getAllPlantLogs, getOnePlantLog } = require("../queries/plantLogs.js");
+const { getAllPlantLogs, getOnePlantLog, deletePlantLog } = require("../queries/plantLogs.js");
 const users = express.Router();
 
 // -- Show All, Show One user's plant(s) and corresponding care logs ---
@@ -76,7 +76,7 @@ users.get("/:userId/userPlants/:plantId/carelogs", async (req, res) => {
   }
 });
 
-// show one care log for selected plant added by logged in user
+// show one care log for selected plant added by logged in user - not sure if needed because I just want to show data of all the carelogs to see plant progress over time
 users.get("/:userId/userPlants/:plantId/carelogs/:id", async (req, res) => {
   try {
     const { userId, plantId, id } = req.params;
@@ -89,6 +89,23 @@ users.get("/:userId/userPlants/:plantId/carelogs/:id", async (req, res) => {
     }
   } catch (error) {
     console.error("Error fetching user's plant and care logs:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+// delete carelog that corresponds to logged in user's plant
+users.delete("/:userId/userPlants/:plantId/carelogs/:id", async (req,res) => {
+  const { userId, plantId, id } = req.params;
+  try {
+    const plant = await getOneUserPlant(userId, plantId);
+    if (plant) {
+      await deletePlantLog(plantId, id);
+      res.json({ message: "Plant care log successfully deleted" });
+    } else {
+      res.status(404).json({ message: "Plant not found" });
+    }
+  } catch (error) {
+    console.error("Error deleting user's plant log:", error);
     res.status(500).json({ error: "Internal server error" });
   }
 });
