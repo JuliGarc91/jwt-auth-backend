@@ -51,6 +51,6 @@ CREATE TABLE careLogs (
   needsRepotting BOOLEAN,
   rootsHealthy BOOLEAN,
   wateringFrequencyPerWeek INTEGER,
-  sunlightHoursPerDay INTEGER,
+  sunlightHoursPerDay INTEGER CHECK (sunlightHoursPerDay >= 1 AND sunlightHoursPerDay <= 24),
   FOREIGN KEY (plantId) REFERENCES plants(id)
 );
