@@ -14,14 +14,14 @@ VALUES
 ;
 
 -- image url to see plant's progress everytime theres a log
-INSERT INTO careLogs (plantId, careDate, plantName, description, imageUrl, heightInInches, soilIsMoist, needsWaterToday, pottedPlant, isPropagation, needsRepotting, rootsHealthy, wateringFrequencyPerWeek, sunlightHoursPerDay)
+INSERT INTO careLogs (plantId, careDate, plantName, description, imageUrl, heightInInches, soilIsMoist, needsWaterToday, pottedPlant, isPropagation, needsRepotting, rootsHealthy, wateringFrequencyPerWeek, sunlightHoursPerDay, soilMoisturePercentDaily)
 VALUES
-(1, '2024-04-01', 'Spider Plant', 'Day 1: snipped babies, and propagated the spider plant.', 'https://www.fwmadebycarli.com/wp-content/uploads/2020/03/Spider-Plant-Propagation-10-1536x1281.jpg', 1, FALSE, FALSE, FALSE, TRUE, FALSE, TRUE, 2, 6),
-(1, '2024-04-03', 'Spider Plant', 'Day 3: Propagated the spider plant - some root growth', 'https://www.fwmadebycarli.com/wp-content/uploads/2020/03/Spider-Plant-Propagation-2-1536x1055.jpg', 1, FALSE, FALSE, FALSE, TRUE, FALSE, TRUE, 2, 6),
-(1, '2024-04-05', 'Spider Plant', 'Day 5: Propagated the spider plant - good amount of root growth. Plant ready to be planted', 'https://www.fwmadebycarli.com/wp-content/uploads/2020/03/66301-1536x1048.jpg', 1, FALSE, FALSE, FALSE, TRUE, TRUE, TRUE, 2, 6),
-(1, '2024-04-13', 'Spider Plant', 'Day 13: Propagated the spider plant - ALOT of root growth. Plant definitely needs to be planted', 'https://www.fwmadebycarli.com/wp-content/uploads/2020/03/Spider-Plant-Propagation-4-scaled.jpg', 2, FALSE, FALSE, FALSE, TRUE, TRUE, TRUE, 2, 6),
-(1, '2024-04-13', 'Spider Plant', 'Day 13: Planted and watered propagations!', 'https://www.fwmadebycarli.com/wp-content/uploads/2020/08/DD154B2B-20FE-4459-9717-6C81549BA108-1536x1060.jpeg', 2, TRUE, FALSE, TRUE, FALSE, FALSE, TRUE, 2, 6),
-(2, '2024-04-12', 'Snake Plant', 'Trimmed dead leaves from the snake plant.', 'https://www.bloomingbackyard.com/wp-content/uploads/2021/10/prune-snake-plant-768x1152.jpg', 9, TRUE, TRUE, TRUE, FALSE, FALSE, TRUE, 1, 4),
-(3, '2024-04-12', 'Peace Lily' ,'Applied fertilizer to the peace lily.', 'https://www.pennington.com/all-products/fertilizer/resources/-/media/Project/OneWeb/Pennington/Images/blog/fertilizer/how-to-grow-and-care-for-a-peace-lily/waking-winter-plants.jpg', 12, TRUE, FALSE, TRUE, TRUE, FALSE, TRUE, 2, 3);
+(1, '2024-04-01', 'Spider Plant', 'Day 1: snipped babies, and propagated the spider plant.', 'https://www.fwmadebycarli.com/wp-content/uploads/2020/03/Spider-Plant-Propagation-10-1536x1281.jpg', 1, FALSE, FALSE, FALSE, TRUE, FALSE, TRUE, 2, 6, 0),
+(1, '2024-04-03', 'Spider Plant', 'Day 3: Propagated the spider plant - some root growth', 'https://www.fwmadebycarli.com/wp-content/uploads/2020/03/Spider-Plant-Propagation-2-1536x1055.jpg', 1, FALSE, FALSE, FALSE, TRUE, FALSE, TRUE, 2, 6, 0),
+(1, '2024-04-05', 'Spider Plant', 'Day 5: Propagated the spider plant - good amount of root growth. Plant ready to be planted', 'https://www.fwmadebycarli.com/wp-content/uploads/2020/03/66301-1536x1048.jpg', 1, FALSE, FALSE, FALSE, TRUE, TRUE, TRUE, 2, 6, 0),
+(1, '2024-04-13', 'Spider Plant', 'Day 13: Propagated the spider plant - ALOT of root growth. Plant definitely needs to be planted', 'https://www.fwmadebycarli.com/wp-content/uploads/2020/03/Spider-Plant-Propagation-4-scaled.jpg', 2, FALSE, FALSE, FALSE, TRUE, TRUE, TRUE, 2, 6, 0),
+(1, '2024-04-13', 'Spider Plant', 'Day 13: Planted and watered propagations!', 'https://www.fwmadebycarli.com/wp-content/uploads/2020/08/DD154B2B-20FE-4459-9717-6C81549BA108-1536x1060.jpeg', 2, TRUE, FALSE, TRUE, FALSE, FALSE, TRUE, 2, 6, 65),
+(2, '2024-04-12', 'Snake Plant', 'Trimmed dead leaves from the snake plant.', 'https://www.bloomingbackyard.com/wp-content/uploads/2021/10/prune-snake-plant-768x1152.jpg', 9, TRUE, FALSE, TRUE, FALSE, FALSE, TRUE, 1, 4, 50),
+(3, '2024-04-12', 'Peace Lily' ,'Applied fertilizer to the peace lily.', 'https://www.pennington.com/all-products/fertilizer/resources/-/media/Project/OneWeb/Pennington/Images/blog/fertilizer/how-to-grow-and-care-for-a-peace-lily/waking-winter-plants.jpg', 12, TRUE, FALSE, TRUE, TRUE, FALSE, TRUE, 2, 3, 50);
 
 
