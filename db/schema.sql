@@ -46,10 +46,8 @@ CREATE TABLE careLogs (
   heightInInches INTEGER,
   isPropagation BOOLEAN,
   needsRepotting BOOLEAN,
-  wateringFrequencyPerWeek INTEGER,
   sunlightHoursPerDay INTEGER CHECK (sunlightHoursPerDay >= 1 AND sunlightHoursPerDay <= 24),
   soilMoisturePercentDaily INTEGER CHECK (soilMoisturePercentDaily >= 0 AND soilMoisturePercentDaily <= 100),
-  mLofWaterPerWeek INTEGER,
   mLWaterAddedToday INTEGER,
   FOREIGN KEY (plantId) REFERENCES plants(id)
 );
