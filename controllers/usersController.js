@@ -1,7 +1,7 @@
 const express = require("express");
 const { getAllUsers, findUserById } = require("../queries/users.js");
 const { getAllUserPlants, getOneUserPlant, addUserPlant, editUserPlant, deleteUserPlant } = require("../queries/userPlants");
-const { getAllPlantLogs, getOnePlantLog, deletePlantLog } = require("../queries/plantLogs.js");
+const { getAllPlantLogs, getOnePlantLog, deletePlantLog, addPlantLog } = require("../queries/plantLogs.js");
 const users = express.Router();
 
 // -- Show All, Show One user's plant(s) and corresponding care logs ---
@@ -92,6 +92,10 @@ users.get("/:userId/userPlants/:plantId/carelogs/:id", async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   }
 });
+
+users.post("/:userId/userPlants/:plantId/carelogs", async (req, res) => {
+  
+}
 
 // delete carelog that corresponds to logged in user's plant
 users.delete("/:userId/userPlants/:plantId/carelogs/:id", async (req, res) => {

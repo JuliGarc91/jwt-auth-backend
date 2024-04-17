@@ -44,15 +44,12 @@ CREATE TABLE careLogs (
   description TEXT,
   imageUrl TEXT,
   heightInInches INTEGER,
-  soilIsMoist BOOLEAN,
-  needsWaterToday BOOLEAN,
-  pottedPlant BOOLEAN,
   isPropagation BOOLEAN,
   needsRepotting BOOLEAN,
-  rootsHealthy BOOLEAN,
   wateringFrequencyPerWeek INTEGER,
   sunlightHoursPerDay INTEGER CHECK (sunlightHoursPerDay >= 1 AND sunlightHoursPerDay <= 24),
   soilMoisturePercentDaily INTEGER CHECK (soilMoisturePercentDaily >= 0 AND soilMoisturePercentDaily <= 100),
   mLofWaterPerWeek INTEGER,
+  mLWaterAddedToday INTEGER,
   FOREIGN KEY (plantId) REFERENCES plants(id)
 );

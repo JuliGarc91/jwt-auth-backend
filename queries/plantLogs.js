@@ -46,10 +46,61 @@ const deletePlantLog = async (plantId, id) => {
   }
 };
 
-// make a create and edit 
+// make a create and edit
+
+/*
+CREATE TABLE careLogs (
+  id SERIAL PRIMARY KEY,
+  plantId INTEGER NOT NULL,
+  plantName VARCHAR(255) NOT NULL,
+  careDate TEXT,
+  description TEXT,
+  imageUrl TEXT,
+  heightInInches INTEGER,
+  soilIsMoist BOOLEAN,
+  needsWaterToday BOOLEAN,
+  pottedPlant BOOLEAN,
+  isPropagation BOOLEAN,
+  needsRepotting BOOLEAN,
+  rootsHealthy BOOLEAN,
+  wateringFrequencyPerWeek INTEGER,
+  sunlightHoursPerDay INTEGER CHECK (sunlightHoursPerDay >= 1 AND sunlightHoursPerDay <= 24),
+  soilMoisturePercentDaily INTEGER CHECK (soilMoisturePercentDaily >= 0 AND soilMoisturePercentDaily <= 100),
+  mLofWaterPerWeek INTEGER,
+  FOREIGN KEY (plantId) REFERENCES plants(id)
+);
+*/
+
+const addPlantLog = async (plantLog) => {
+  try {
+    const query = `
+      INSERT INTO careLogs (plantId, plantName, careDate, description, imageUrl, heightInInches, isPropagation, needsRepotting, wateringFrequencyPerWeek, sunlightHoursPerDay, soilMoisturePercentDaily, mLofWaterPerWeek)
+      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) RETURNING *`;
+    const newPlantLog = await db.one(query, [
+      plantLog.plantid, 
+      plantLog.plantname, 
+      plantLog.caredate, 
+      plantLog.description, 
+      plantLog.imageurl, 
+      plantLog.heightininches, 
+      plantLog.ispropagation, 
+      plantLog.needsrepotting, 
+      plantLog.wateringfrequencyperweek, 
+      plantLog.sunlighthoursperday, 
+      plantLog.soilmoisturepercentdaily, 
+      plantLog.mlofwaterperweek, 
+      plantLog.mlwateraddedtoday
+    ]);
+    return newPlantLog;
+  } catch (error) {
+    console.error("Error adding plant care log:", error);
+    throw error;
+  }
+};
 
 module.exports = {
     getAllPlantLogs,
     getOnePlantLog,
-    deletePlantLog
+    deletePlantLog,
+    addPlantLog
 }
