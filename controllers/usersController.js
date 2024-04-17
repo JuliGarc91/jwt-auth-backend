@@ -94,8 +94,22 @@ users.get("/:userId/userPlants/:plantId/carelogs/:id", async (req, res) => {
 });
 
 users.post("/:userId/userPlants/:plantId/carelogs", async (req, res) => {
-  
-}
+  try {
+    const { userId, plantId } = req.params;
+    const { plantName } = req.body;
+    const plant = await getOneUserPlant(userId, plantId);
+    if (plant) {
+      const newCareLog = await addPlantLog(req.body, plantId, plantName);
+      res.status(200).json({ careLog: newCareLog });
+    } else {
+      res.status(404).json({ message: "Failed to add new care log" });
+    }
+  } catch (error) {
+    console.error("Error adding care log:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
 
 // delete carelog that corresponds to logged in user's plant
 users.delete("/:userId/userPlants/:plantId/carelogs/:id", async (req, res) => {

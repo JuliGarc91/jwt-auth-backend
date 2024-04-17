@@ -71,25 +71,25 @@ CREATE TABLE careLogs (
 );
 */
 
-const addPlantLog = async (plantLog) => {
+const addPlantLog = async (plantLog, plantId, plantName) => {
   try {
     const query = `
-      INSERT INTO careLogs (plantId, plantName, careDate, description, imageUrl, heightInInches, isPropagation, needsRepotting, wateringFrequencyPerWeek, sunlightHoursPerDay, soilMoisturePercentDaily, mLofWaterPerWeek)
+      INSERT INTO careLogs (plantId, plantName, careDate, description, imageUrl, heightInInches, isPropagation, needsRepotting, wateringFrequencyPerWeek, sunlightHoursPerDay, soilMoisturePercentDaily, mLofWaterPerWeek, mLWaterAddedToday)
       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) RETURNING *`;
     const newPlantLog = await db.one(query, [
-      plantLog.plantid, 
-      plantLog.plantname, 
-      plantLog.caredate, 
-      plantLog.description, 
-      plantLog.imageurl, 
-      plantLog.heightininches, 
-      plantLog.ispropagation, 
-      plantLog.needsrepotting, 
-      plantLog.wateringfrequencyperweek, 
-      plantLog.sunlighthoursperday, 
-      plantLog.soilmoisturepercentdaily, 
-      plantLog.mlofwaterperweek, 
-      plantLog.mlwateraddedtoday
+      plantId,
+      plantName,
+      plantLog.careDate,
+      plantLog.description,
+      plantLog.imageUrl,
+      plantLog.heightInInches,
+      plantLog.isPropagation,
+      plantLog.needsRepotting,
+      plantLog.wateringFrequencyPerWeek,
+      plantLog.sunlightHoursPerDay,
+      plantLog.soilMoisturePercentDaily,
+      plantLog.mLofWaterPerWeek,
+      plantLog.mLWaterAddedToday
     ]);
     return newPlantLog;
   } catch (error) {
@@ -97,6 +97,7 @@ const addPlantLog = async (plantLog) => {
     throw error;
   }
 };
+
 
 module.exports = {
     getAllPlantLogs,
