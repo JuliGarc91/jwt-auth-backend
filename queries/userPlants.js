@@ -34,10 +34,19 @@ VALUES
 const addUserPlant = async (plant) => {
   try {
     const query = `
-      INSERT INTO plants (userId, name, species, careInstructions, imageUrl)
-      VALUES ($1, $2, $3, $4, $5) RETURNING *;`;
+      INSERT INTO plants (userId, name, species, color,
+        planttype, isfloweringplant, soiltype,  careInstructions, imageUrl)
+      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *;`;
     const newPlant= await db.one(query, [
-      plant.userid, plant.name, plant.species, plant.careinstructions, plant.imageurl,
+      plant.userid, 
+      plant.name, 
+      plant.species,
+      plant.color,
+      plant.planttype,
+      plant.isfloweringplant,
+      plant.soiltype, 
+      plant.careinstructions, 
+      plant.imageurl,
     ]);
     return newPlant;
   } catch (error) {
@@ -50,11 +59,20 @@ const editUserPlant = async (plantId, editedPlant) => {
   try {
     const query = `
       UPDATE plants
-      SET userId = $1, name = $2, species = $3, careInstructions = $4, imageUrl = $5
-      WHERE id = $6
+      SET userId = $1, name = $2, species = $3, color = $4, plantType = $5, isFloweringPlant = $6,  soilType =$7, careInstructions = $8, imageUrl = $9
+      WHERE id = $10
       RETURNING *;`;
     const editedUserPlant = await db.one(query, [
-      editedPlant.userid, editedPlant.name, editedPlant.species, editedPlant.careinstructions, editedPlant.imageurl, plantId
+      editedPlant.userid,
+      editedPlant.name, 
+      editedPlant.species,
+      editedPlant.color,
+      editedPlant.planttype,
+      editedPlant.isfloweringplant,
+      editedPlant.soiltype, 
+      editedPlant.careinstructions, 
+      editedPlant.imageurl, 
+      plantId
     ]);
     return editedUserPlant;
   } catch (error) {
@@ -65,10 +83,7 @@ const editUserPlant = async (plantId, editedPlant) => {
 
 const deleteUserPlant = async (plantId) => {
   try {
-    // first need to delete care logs associated with the plant because of foreign key constraint where one plant can have many care logs
     await db.none('DELETE FROM carelogs WHERE plantId = $1', [plantId]);
-    
-    // then plant can be deleted
     const query = `
       DELETE FROM plants
       WHERE id = $1

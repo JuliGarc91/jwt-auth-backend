@@ -142,7 +142,7 @@ users.put("/:userId/userPlants/:id", async(req, res) => {
   try {
     const editedUserPlant = await editUserPlant(
       id,
-      ...[req.body],
+      req.body,
       userId
     );
     res.json({ userPlant: editedUserPlant});
