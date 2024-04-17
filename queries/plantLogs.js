@@ -48,28 +48,6 @@ const deletePlantLog = async (plantId, id) => {
 
 // make a create and edit
 
-/*
-CREATE TABLE careLogs (
-  id SERIAL PRIMARY KEY,
-  plantId INTEGER NOT NULL,
-  plantName VARCHAR(255) NOT NULL,
-  careDate TEXT,
-  description TEXT,
-  imageUrl TEXT,
-  heightInInches INTEGER,
-  soilIsMoist BOOLEAN,
-  needsWaterToday BOOLEAN,
-  pottedPlant BOOLEAN,
-  isPropagation BOOLEAN,
-  needsRepotting BOOLEAN,
-  rootsHealthy BOOLEAN,
-  wateringFrequencyPerWeek INTEGER,
-  sunlightHoursPerDay INTEGER CHECK (sunlightHoursPerDay >= 1 AND sunlightHoursPerDay <= 24),
-  soilMoisturePercentDaily INTEGER CHECK (soilMoisturePercentDaily >= 0 AND soilMoisturePercentDaily <= 100),
-  mLofWaterPerWeek INTEGER,
-  FOREIGN KEY (plantId) REFERENCES plants(id)
-);
-*/
 
 const addPlantLog = async (plantLog, plantId, plantName) => {
   try {
