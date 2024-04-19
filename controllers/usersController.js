@@ -1,7 +1,7 @@
 const express = require("express");
 const { getAllUsers, findUserById } = require("../queries/users.js");
 const { getAllUserPlants, getOneUserPlant, addUserPlant, editUserPlant, deleteUserPlant } = require("../queries/userPlants");
-const { getAllPlantLogs, getOnePlantLog, deletePlantLog, addPlantLog } = require("../queries/plantLogs.js");
+const { getAllPlantLogs, getOnePlantLog, deletePlantLog, addPlantLog, editPlantLog } = require("../queries/plantLogs.js");
 const users = express.Router();
 
 // -- Show All, Show One user's plant(s) and corresponding care logs ---
@@ -96,10 +96,10 @@ users.get("/:userId/userPlants/:plantId/carelogs/:id", async (req, res) => {
 users.post("/:userId/userPlants/:plantId/carelogs", async (req, res) => {
   try {
     const { userId, plantId } = req.params;
-    const { plantName } = req.body;
+    const { plantname } = req.body; // plant name is required
     const plant = await getOneUserPlant(userId, plantId);
     if (plant) {
-      const newCareLog = await addPlantLog(req.body, plantId, plantName);
+      const newCareLog = await addPlantLog(req.body, plantId, plantname);
       res.status(200).json({ careLog: newCareLog });
     } else {
       res.status(404).json({ message: "Failed to add new care log" });
@@ -110,6 +110,23 @@ users.post("/:userId/userPlants/:plantId/carelogs", async (req, res) => {
   }
 });
 
+users.put("/:userId/userPlants/:plantId/carelogs/:id", async (req, res) => {
+  try {
+    const { userId, plantId, id } = req.params;
+    const updatedLogData = req.body;
+    const plant = await getOneUserPlant(userId, plantId);
+
+    if (plant) {
+      const updatedCareLog = await editPlantLog(id, updatedLogData);
+      res.status(200).json({ careLog: updatedCareLog });
+    } else {
+      res.status(404).json({ message: "Failed to update care log: Plant not found" });
+    }
+  } catch (error) {
+    console.error("Error updating care log:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
 
 // delete carelog that corresponds to logged in user's plant
 users.delete("/:userId/userPlants/:plantId/carelogs/:id", async (req, res) => {

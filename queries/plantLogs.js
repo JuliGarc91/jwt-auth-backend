@@ -14,6 +14,7 @@ const getAllPlantLogs = async (plantId) => {
 };
 
 // probably not needed because chart view includes all the carelogs
+// maybe will use to create a view to toggle edit form
 const getOnePlantLog = async (plantId, id) => {
   try {
     const query = await db.oneOrNone(
@@ -30,7 +31,6 @@ const getOnePlantLog = async (plantId, id) => {
   }
 };
 
-
 const deletePlantLog = async (plantId, id) => {
   try {
     const query = `
@@ -46,28 +46,23 @@ const deletePlantLog = async (plantId, id) => {
   }
 };
 
-// make a create and edit
-
-
 const addPlantLog = async (plantLog, plantId, plantName) => {
   try {
     const query = `
-      INSERT INTO careLogs (plantId, plantName, careDate, description, imageUrl, heightInInches, isPropagation, needsRepotting, wateringFrequencyPerWeek, sunlightHoursPerDay, soilMoisturePercentDaily, mLofWaterPerWeek, mLWaterAddedToday)
-      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) RETURNING *`;
+      INSERT INTO careLogs (plantId, plantName, careDate, description, imageUrl, heightInInches, isPropagation, needsRepotting, sunlightHoursPerDay, soilMoisturePercentDaily, mLWaterAddedToday)
+      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING *`;
     const newPlantLog = await db.one(query, [
       plantId,
       plantName,
-      plantLog.careDate,
+      plantLog.caredate,
       plantLog.description,
-      plantLog.imageUrl,
-      plantLog.heightInInches,
-      plantLog.isPropagation,
-      plantLog.needsRepotting,
-      plantLog.wateringFrequencyPerWeek,
-      plantLog.sunlightHoursPerDay,
-      plantLog.soilMoisturePercentDaily,
-      plantLog.mLofWaterPerWeek,
-      plantLog.mLWaterAddedToday
+      plantLog.imageurl,
+      plantLog.heightininches,
+      plantLog.ispropagation,
+      plantLog.needsrepotting,
+      plantLog.sunlighthoursperday,
+      plantLog.soilmoisturepercentdaily,
+      plantLog.mlwateraddedtoday
     ]);
     return newPlantLog;
   } catch (error) {
@@ -76,10 +71,36 @@ const addPlantLog = async (plantLog, plantId, plantName) => {
   }
 };
 
+const editPlantLog = async (id, editedLog) => {
+  try {
+    const query = `
+      UPDATE careLogs
+      SET plantId = $1, plantName = $2, careDate = $3, description = $4, 
+          imageUrl = $5, heightInInches = $6, isPropagation = $7, 
+          needsRepotting = $8, 
+          sunlightHoursPerDay = $9, soilMoisturePercentDaily = $10, 
+          mLWaterAddedToday = $11
+      WHERE id = $12
+      RETURNING *;`;
+    const editedPlantLog = await db.one(query, [
+      editedLog.plantid, editedLog.plantname, editedLog.caredate, 
+      editedLog.description, editedLog.imageurl, editedLog.heightininches, 
+      editedLog.ispropagation, editedLog.needsrepotting, editedLog.sunlighthoursperday, 
+      editedLog.soilmoisturepercentdaily,
+      editedLog.mlwateraddedtoday,
+      id
+    ]);
+    return editedPlantLog;
+  } catch (error) {
+    console.error("Error editing plant log:", error);
+    throw new Error("Error editing plant log: " + error.message);
+  }
+};
 
 module.exports = {
     getAllPlantLogs,
     getOnePlantLog,
     deletePlantLog,
-    addPlantLog
+    addPlantLog,
+    editPlantLog
 }

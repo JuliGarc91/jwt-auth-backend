@@ -26,11 +26,7 @@ const getOneUserPlant = async (userId, id) => {
     return `error: ${error}`;
   }
 };
-/*
-INSERT INTO plants (userId, name, species, careInstructions, imageUrl)
-VALUES 
-(1, 'Spider Plant', 'Chlorophytum comosum', 'Keep soil evenly moist but not waterlogged. Prefers indirect sunlight.', 'img_url');
-*/
+
 const addUserPlant = async (plant) => {
   try {
     const query = `
