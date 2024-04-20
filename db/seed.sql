@@ -7,7 +7,7 @@ VALUES
 
 INSERT INTO plants (userId, name, species, color, plantType, isFloweringPlant, soilType, careInstructions, imageUrl)
 VALUES 
-(1, 'Spider Plant', 'Chlorophytum comosum', 'Variegated', ' evergreen perennial', TRUE, 'General Purpose Potting Soil','Keep soil evenly moist but not waterlogged. Prefers indirect sunlight. Fun fact: The brighter the sunlight, the more stripes your plant will produce. Too bright of sun, though, and the leaves will scorch.', 'https://res.cloudinary.com/dwygxzqku/image/upload/v1713548460/Garden%20Nook/spider-plant.avif'),
+(1, 'Spider Plant', 'Chlorophytum comosum', 'Variegated', ' evergreen perennial', TRUE, 'General Purpose Potting Soil','Keep soil evenly moist but not waterlogged. Prefers indirect sunlight. Fun fact: The brighter the sunlight, the more stripes your plant will produce. Too bright of sun, though, and the leaves will scorch.', 'https://res.cloudinary.com/dwygxzqku/image/upload/v1713637834/Garden%20Nook/spiderplant-flower.jpg'),
 
 (1, 'Snake Plant', 'Sansevieria trifasciata', 'Variegated','evergreen perennial', TRUE, 'Sandy Soil','Allow soil to dry out between waterings. Snake plants can do well in almost any light, from dimly lit rooms to full sun, but they grow more quickly in bright, indirect light. Tolerates low light conditions.', 'https://res.cloudinary.com/dwygxzqku/image/upload/v1713543727/Garden%20Nook/snake-plant.avif'),
 
