@@ -1,7 +1,7 @@
 // DEPENDENCIES
 const cors = require("cors");
 const express = require("express");
-const cron = require("node-cron");
+// const cron = require("node-cron");
 const cookieParser = require("cookie-parser");
 
 // controllers
@@ -23,10 +23,13 @@ const app = express();
 // MIDDLEWARE change origin to your frontend netlify address for deployment
 app.use(
   cors({
-    origin: "http://localhost:3000",
-    // origin: "https://main--jwt-auth-10-3.netlify.app/",
+    origin: [
+      "http://localhost:3000",
+      "https://gardennook.netlify.app/"
+    ]
   })
 );
+
 app.use(express.json());
 app.use(cookieParser());
 
