@@ -25,7 +25,7 @@ app.use(
   cors({
     origin: [
       "http://localhost:3000",
-      "https://gardennook.netlify.app/"
+      "https://gardennook.netlify.app"
     ]
   })
 );
